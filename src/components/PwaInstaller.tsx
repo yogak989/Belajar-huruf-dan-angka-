@@ -49,7 +49,7 @@ export default function PwaInstaller() {
       // Mascot notification
       window.dispatchEvent(new CustomEvent('mascot-trigger', {
         detail: {
-          message: "Wah! Kawan pintar sudah berhasil memasang aplikasi Belajar Pujashanti di Layar Utama! Kini belajar jadi lebih mudah dan cepat setiap hari! 🎒🎉💖",
+          message: "Wah! Kawan pintar sudah berhasil memasang aplikasi Belajar Shanti di Layar Utama! Kini belajar jadi lebih mudah dan cepat setiap hari! 🎒🎉💖",
           triggerSpeak: true,
           animation: 'cheer'
         }
@@ -167,7 +167,7 @@ export default function PwaInstaller() {
                         Mudah
                       </span>
                     </h3>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Belajar Pintar Pujashanti</p>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Belajar Pintar Shanti</p>
                   </div>
                 </div>
                 <button
@@ -244,7 +244,7 @@ export default function PwaInstaller() {
                     </div>
                     <ol className="list-decimal list-inside text-[11px] text-slate-600 space-y-1.5 font-medium pl-1">
                       <li>Klik ikon <strong className="font-extrabold text-indigo-600">Instal</strong> di bilah alamat browser (address bar) di bagian kanan atas 🖥️.</li>
-                      <li>Atau klik menu browser tiga titik lalu pilih opsi <strong className="font-extrabold text-indigo-600">Instal Belajar Pujashanti</strong>.</li>
+                      <li>Atau klik menu browser tiga titik lalu pilih opsi <strong className="font-extrabold text-indigo-600">Instal Belajar Shanti</strong>.</li>
                     </ol>
                   </div>
                 </div>

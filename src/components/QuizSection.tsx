@@ -243,7 +243,7 @@ export default function QuizSection() {
         speakText(`Hore! Kamu selesai dengan sangat baik! Kumpulkan ${score} bintang dambaanmu!`);
         window.dispatchEvent(new CustomEvent('mascot-trigger', {
           detail: {
-            message: `Luar biasa pintar! Kamu menyelesaikan kuis dengan total ${score * 10} poin! Puji sangat kagum padamu! Juara Bintang sejati! 🏆🐰✨`,
+            message: `Luar biasa pintar! Kamu menyelesaikan kuis dengan total ${score * 10} poin! Shanti sangat kagum padamu! Juara Bintang sejati! 🏆🐰✨`,
             triggerSpeak: false,
             animation: 'cheer'
           }
@@ -252,7 +252,7 @@ export default function QuizSection() {
         speakText(`Selesai! Kamu mendapatkan ${score} bintang. Berlatih terus makin jago!`);
         window.dispatchEvent(new CustomEvent('mascot-trigger', {
           detail: {
-            message: `Hebat! Sesi belajarmu selesai dengan ${score} Bintang! Ayo latihan lagi bersama Puji agar dapat nilai penuh 100! 🎒🌟`,
+            message: `Hebat! Sesi belajarmu selesai dengan ${score} Bintang! Ayo latihan lagi bersama Shanti agar dapat nilai penuh 100! 🎒🌟`,
             triggerSpeak: false,
             animation: 'bounce'
           }

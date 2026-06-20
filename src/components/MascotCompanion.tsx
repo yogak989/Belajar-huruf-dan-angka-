@@ -23,15 +23,15 @@ const OUT_FITS: Record<string, Mood> = {
 const RANDOM_MOTIVATIONS = [
   "Wah, kamu hebat sekali! Teruskan belajarmu kawan! 💪",
   "Keren! Setiap langkah kecil membuatmu semakin pintar! 🌟",
-  "Puji bangga sekali melihatmu tekun belajar hari ini! 💖",
-  "Luar biasa! Belajar bersama Pujashanti memang sangat seru, kan? 🎯",
+  "Shanti bangga sekali melihatmu tekun belajar hari ini! 💖",
+  "Luar biasa! Belajar bersama Shanti memang sangat seru, kan? 🎯",
   "Kamu sungguh istimewa! Jangan pernah menyerah belajar ya! ✨",
   "Yippee! Kamu berhak mendapatkan bintang emas atas usahamu! 🏆",
 ];
 
 export default function MascotCompanion() {
   const [outfit, setOutfit] = useState<keyof typeof OUT_FITS>('default');
-  const [speech, setSpeech] = useState<string>("Halo kawan pintar! Puji siap menemanimu belajar huruf dan angka hari ini! Ketuk aku untuk mengobrol ya! 🐰💖");
+  const [speech, setSpeech] = useState<string>("Halo kawan pintar! Shanti siap menemanimu belajar huruf dan angka hari ini! Ketuk aku untuk mengobrol ya! 🐰💖");
   const [bubbleVisible, setBubbleVisible] = useState(true);
   const [cheering, setCheering] = useState(false);
   const [triggerKey, setTriggerKey] = useState(0);
@@ -83,7 +83,7 @@ export default function MascotCompanion() {
     const nextOutfit = keys[nextIndex];
     setOutfit(nextOutfit);
     
-    const reaction = `Hore! Puji sekarang memakai kostum ${OUT_FITS[nextOutfit].label}. Keren sekali kan?`;
+    const reaction = `Hore! Shanti sekarang memakai kostum ${OUT_FITS[nextOutfit].label}. Keren sekali kan?`;
     setSpeech(reaction);
     setBubbleVisible(true);
     speakText(reaction);
@@ -116,7 +116,7 @@ export default function MascotCompanion() {
             <div className="flex items-center gap-1.5 mb-1.5">
               <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
               <span className="text-[10px] font-black uppercase text-pink-600 tracking-wider">
-                Puji Sahabat Pintarmu
+                Shanti Sahabat Pintarmu
               </span>
             </div>
 
@@ -164,7 +164,7 @@ export default function MascotCompanion() {
         onClick={handleMascotClick}
         className={`pointer-events-auto cursor-pointer p-2.5 rounded-full border-2 shadow-[0_12px_24px_-4px_rgba(0,0,0,0.12)] flex items-center justify-center relative group min-w-[56px] min-h-[56px] sm:min-w-[64px] sm:min-h-[64px] ${activeMood.bgColor} ${activeMood.borderColor}`}
         id="mascot-avatar-button"
-        title="Klik Puji untuk motivasi!"
+        title="Klik Shanti untuk motivasi!"
       >
         <span className="text-2xl sm:text-3xl select-none" role="img" aria-label="Rabbit Mascot">
           {activeMood.emoji}
@@ -174,7 +174,7 @@ export default function MascotCompanion() {
         <button
           onClick={cycleOutfit}
           className="absolute -top-1 -left-1 p-1.5 bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-full shadow-2xs cursor-pointer transition-all active:scale-90"
-          title="Ganti pakaian Puji!"
+          title="Ganti pakaian Shanti!"
         >
           <Shirt className="w-3.5 h-3.5" />
         </button>

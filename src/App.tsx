@@ -53,7 +53,7 @@ export default function App() {
   }, []);
 
   const greetUser = () => {
-    speakText("Halo kawan! Selamat datang di aplikasi Belajar Huruf dan Angka bersama Pujashanti. Ayo kita belajar bersama-sama dengan gembira!");
+    speakText("Halo kawan! Selamat datang di aplikasi Belajar Huruf dan Angka bersama Shanti. Ayo kita belajar bersama-sama dengan gembira!");
   };
 
   const handleTabChange = (tab: ActiveTab) => {
@@ -128,7 +128,7 @@ export default function App() {
       
       window.dispatchEvent(new CustomEvent('mascot-trigger', {
         detail: {
-          message: "Ayo kita mulai petualangan baru bersama Puji! Aku selalu menyemangatimu! 🐰💖🎒",
+          message: "Ayo kita mulai petualangan baru bersama Shanti! Aku selalu menyemangatimu! 🐰💖🎒",
           triggerSpeak: false,
           animation: 'cheer'
         }
@@ -160,7 +160,7 @@ export default function App() {
                   <h1 className="text-xl sm:text-2xl font-black text-[#4f46e5] tracking-tight flex flex-wrap items-center justify-center sm:justify-start gap-2">
                     Belajar Huruf &amp; Angka
                     <span className="text-xs tracking-wider bg-[#eff6ff] text-[#4f46e5] border border-[#bfdbfe] font-bold px-2.5 py-0.5 rounded-full uppercase">
-                      Bersama Pujashanti
+                      Bersama Shanti
                     </span>
                   </h1>
                   <p className="text-xs text-slate-500 mt-1 font-medium">
@@ -229,7 +229,7 @@ export default function App() {
                     className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-full transition-all active:scale-95 cursor-pointer text-xs flex items-center gap-1.5 shadow-2xs select-none uppercase tracking-wider"
                   >
                     <Volume2 className="w-3.5 h-3.5" />
-                    Puji 👋
+                    Shanti 👋
                   </button>
 
                   <button
