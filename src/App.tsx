@@ -428,9 +428,10 @@ export default function App() {
         {/* COMPANION MASCOT HELPER (PUJI SI KELINCI PINTAR) */}
         <MascotCompanion />
 
-        {/* FIXED BOTTOM NAVIGATION BAR */}
-        <div className="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200/80 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] pt-2.5 pb-4 md:pb-4" id="fixed-bottom-navigation-bar">
-          <div className="max-w-md mx-auto px-6 flex justify-around items-center gap-1">
+        {/* FIXED BOTTOM NAVIGATION BAR WRAPPER FOR CONSTRAINED WIDTH */}
+        <div className="fixed bottom-0 inset-x-0 z-50 pointer-events-none" id="fixed-bottom-navigation-bar-wrapper">
+          <div className="max-w-md mx-auto pointer-events-auto bg-white/95 backdrop-blur-md border-t border-slate-200/80 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] pt-2.5 pb-4 md:pb-4" id="fixed-bottom-navigation-bar">
+            <div className="px-6 flex justify-around items-center gap-1">
             
             {/* Beranda Tab */}
             <button
@@ -514,8 +515,8 @@ export default function App() {
 
           </div>
         </div>
-
       </div>
     </div>
-  );
+  </div>
+);
 }
