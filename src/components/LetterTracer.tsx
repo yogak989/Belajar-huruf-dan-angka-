@@ -1,6 +1,34 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { RotateCcw, Eraser } from 'lucide-react';
 
+// Audio helper for synthetic sounds
+const playAudio = (type: 'success' | 'error') => {
+  const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  if (type === 'success') {
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+    osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.1); // G5
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.5);
+  } else {
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+    osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.2); // A2
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.3);
+  }
+};
+
 interface LetterTracerProps {
   letter: string;
 }
@@ -10,6 +38,7 @@ export default function LetterTracer({ letter }: LetterTracerProps) {
   const [isDrawing, setIsDrawing] = useState(false);
   const [brushColor, setBrushColor] = useState('#6366f1'); // Modern indigo default
   const [brushWidth, setBrushWidth] = useState(16);
+  const [guideOpacity, setGuideOpacity] = useState(0.3); // Opacity for the guide letter
 
   const colors = [
     { name: 'Indigo', value: '#6366f1' },
@@ -50,13 +79,13 @@ export default function LetterTracer({ letter }: LetterTracerProps) {
     ctx.stroke();
 
     // Draw a big faint dashed reference guide letter in the center
-    ctx.fillStyle = '#cbd5e1';
+    ctx.fillStyle = `rgba(203, 213, 225, ${guideOpacity})`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = 'bold 150px "Plus Jakarta Sans", sans-serif';
     
     // Render Letter
-    ctx.fillText(`${letter}${letter.toLowerCase()}`, canvas.width / 2, canvas.height / 2 - 10);
+    ctx.fillText(letter, canvas.width / 2, canvas.height / 2 - 10);
     
     // Restore state
     ctx.restore();
@@ -64,7 +93,7 @@ export default function LetterTracer({ letter }: LetterTracerProps) {
 
   useEffect(() => {
     initCanvas();
-  }, [letter]);
+  }, [letter, guideOpacity]);
 
   // Adjust canvas handling for screen density on mount
   useEffect(() => {
@@ -157,7 +186,10 @@ export default function LetterTracer({ letter }: LetterTracerProps) {
         
         <div className="absolute bottom-2 left-2 flex gap-1.5">
           <button
-            onClick={initCanvas}
+            onClick={() => {
+              playAudio('error');
+              initCanvas();
+            }}
             id="btn-clear-canvas"
             className="p-2 bg-white/95 text-slate-600 hover:text-rose-500 rounded-xl shadow-xs border border-slate-100 active:scale-95 transition-all text-xs flex items-center gap-1 font-semibold select-none cursor-pointer"
           >
@@ -167,9 +199,10 @@ export default function LetterTracer({ letter }: LetterTracerProps) {
           
           <button
             onClick={() => {
+              playAudio('success');
               window.dispatchEvent(new CustomEvent('mascot-trigger', {
                 detail: {
-                  message: `Keren banget kawan! Kamu berhasil latihan menulis huruf ${letter} dan ${letter.toLowerCase()} dengan sangat rapi sekali! ✍️🌟`,
+                  message: `Keren banget kawan! Kamu berhasil latihan menulis ${letter} dengan sangat rapi sekali! ✍️🌟`,
                   triggerSpeak: true,
                   animation: 'cheer'
                 }
@@ -225,6 +258,19 @@ export default function LetterTracer({ letter }: LetterTracerProps) {
               </button>
             ))}
           </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-semibold text-slate-500">Tingkat Panduan:</label>
+          <input
+            type="range"
+            min="0.1"
+            max="1"
+            step="0.1"
+            value={guideOpacity}
+            onChange={(e) => setGuideOpacity(parseFloat(e.target.value))}
+            className="w-24 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+          />
         </div>
       </div>
     </div>

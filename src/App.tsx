@@ -9,6 +9,7 @@ import { Volume2, BookOpen, Hash, Award, Sparkles, HelpCircle, RefreshCw, Chevro
 import AlphabetSection from './components/AlphabetSection';
 import NumbersSection from './components/NumbersSection';
 import QuizSection from './components/QuizSection';
+import WritingSection from './components/WritingSection';
 import MascotCompanion from './components/MascotCompanion';
 import PwaInstaller from './components/PwaInstaller';
 import { speakText } from './utils';
@@ -18,7 +19,8 @@ const TAB_INDEX: Record<ActiveTab, number> = {
   home: 0,
   letters: 1,
   numbers: 2,
-  quiz: 3
+  writing: 3,
+  quiz: 4
 };
 
 export default function App() {
@@ -70,6 +72,8 @@ export default function App() {
       speakText("Mari belajar huruf alfabet bersama!");
     } else if (tab === 'numbers') {
       speakText("Mari belajar mengenal angka satu sampai seratus!");
+    } else if (tab === 'writing') {
+      speakText("Mari berlatih menulis huruf dan angka di papan tulis!");
     } else if (tab === 'quiz') {
       speakText("Saatnya bermain kuis pintar! Ayo uji kemampuanmu!");
     }
@@ -331,6 +335,29 @@ export default function App() {
                   </div>
                 </motion.div>
 
+                {/* Menulis Card */}
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => handleTabChange('writing')}
+                  className="bg-white hover:bg-slate-50/50 p-3 sm:p-5 rounded-2xl sm:rounded-3xl border-2 border-slate-100 hover:border-violet-200 transition-all cursor-pointer flex flex-col items-center justify-center text-center shadow-3xs hover:shadow-2xs relative overflow-hidden group aspect-square"
+                  id="menu-card-writing"
+                >
+                  <div className="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-violet-500/[0.05] to-transparent rounded-bl-full pointer-events-none" />
+                  
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-violet-50 border border-violet-100 text-violet-600 flex items-center justify-center font-black text-lg sm:text-xl mb-1.5 sm:mb-2.5 shadow-3xs group-hover:scale-110 transition-transform">
+                    ✏️
+                  </div>
+                  <h3 className="text-[11px] sm:text-xs font-black text-slate-800 tracking-tight leading-tight">
+                    Belajar Menulis
+                  </h3>
+                  <div className="mt-1 sm:mt-1.5 flex items-center justify-center">
+                    <span className="text-[9px] sm:text-[10px] text-violet-600 font-black bg-violet-50/80 px-2 sm:px-2.5 py-0.5 rounded-full border border-violet-100 shadow-3xs whitespace-nowrap">
+                      Tracing ➔
+                    </span>
+                  </div>
+                </motion.div>
+
               </div>
             </div>
           </div>
@@ -403,6 +430,10 @@ export default function App() {
                       completedNumbers={completedNumbers}
                       toggleNumberComplete={toggleNumberComplete}
                     />
+                  )}
+
+                  {activeTab === 'writing' && (
+                    <WritingSection />
                   )}
 
                   {activeTab === 'quiz' && (
@@ -510,6 +541,26 @@ export default function App() {
                 activeTab === 'quiz' ? 'text-indigo-600 font-extrabold' : 'text-slate-500'
               }`}>
                 Kuis
+              </span>
+            </button>
+
+            {/* Menulis Tab */}
+            <button
+              onClick={() => handleTabChange('writing')}
+              className={`flex-1 flex flex-col items-center justify-center py-0.5 rounded-xl transition-all cursor-pointer ${
+                activeTab === 'writing' ? 'text-indigo-600' : 'text-slate-400 hover:text-slate-700'
+              }`}
+              id="bottom-tab-writing"
+            >
+              <div className={`p-1.5 rounded-xl transition-all ${
+                activeTab === 'writing' ? 'bg-indigo-50 border border-indigo-100/50 text-indigo-600' : 'bg-transparent text-slate-400'
+              }`}>
+                <BookOpen className="w-5 h-5 stroke-[2.2]" />
+              </div>
+              <span className={`text-[10.5px] font-bold mt-1 tracking-wide ${
+                activeTab === 'writing' ? 'text-indigo-600 font-extrabold' : 'text-slate-500'
+              }`}>
+                Menulis
               </span>
             </button>
 

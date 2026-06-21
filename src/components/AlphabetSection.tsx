@@ -3,7 +3,6 @@ import { motion } from 'motion/react';
 import { Volume2, ArrowLeft, ArrowRight, Award, Sparkles, BookOpen } from 'lucide-react';
 import { ALPHABET_DATA, CATEGORY_COLORS } from '../data';
 import { speakText } from '../utils';
-import LetterTracer from './LetterTracer';
 
 interface AlphabetSectionProps {
   completedLetters: string[];
@@ -273,7 +272,7 @@ export default function AlphabetSection({ completedLetters, toggleLetterComplete
 
           {/* Letter tracing whiteboard integrated inside selected Bento Box */}
           <div className="border-t border-slate-100 pt-5 flex justify-center w-full">
-            <LetterTracer letter={currentLetterItem.letter} />
+            <p className="text-xs text-slate-400 font-medium">Buka menu Belajar Menulis untuk latihan tracing!</p>
           </div>
         </motion.div>
       </div>

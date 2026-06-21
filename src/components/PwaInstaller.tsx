@@ -104,6 +104,9 @@ export default function PwaInstaller() {
     setTimeout(() => setIsCopied(false), 2000);
   };
 
+  const CANONICAL_URL = "https://belajar-huruf-dan-angka.pages.dev";
+  const isCanonical = window.location.origin === CANONICAL_URL;
+
   // If the app is already installed or runs inside standalone mode, completely hide PWA installer
   if (isInstalled) {
     return null;
@@ -181,23 +184,40 @@ export default function PwaInstaller() {
 
               {/* Body Content with instructions */}
               <div className="p-6 space-y-4 overflow-y-auto flex-grow scrollbar-thin">
-                <div className="text-center pb-2">
-                  <span className="text-4xl animate-pulse inline-block mb-2">🎯</span>
-                  <p className="text-xs font-semibold text-slate-600 leading-relaxed px-2">
-                    Ayo pasang aplikasi ke Layar Utama HP atau Laptop kamu agar belajar huruf dan angka jadi lebih cepat tanpa mengetik nama website lagi!
-                  </p>
-                </div>
+                {!isCanonical ? (
+                  <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200/50 text-center">
+                    <Sparkles className="w-8 h-8 text-amber-500 mx-auto mb-2" />
+                    <p className="text-xs font-semibold text-amber-800 leading-relaxed mb-4">
+                      Untuk pengalaman terbaik dan pembaruan aplikasi langsung, silakan pasang aplikasi kami melalui website resmi kami.
+                    </p>
+                    <a
+                      href={CANONICAL_URL}
+                      className="inline-block w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-black rounded-2xl shadow-md transition-all text-xs cursor-pointer text-center uppercase tracking-widest"
+                    >
+                      Buka Versi Resmi untuk Pasang
+                    </a>
+                  </div>
+                ) : (
+                  <>
+                    <div className="text-center pb-2">
+                      <span className="text-4xl animate-pulse inline-block mb-2">🎯</span>
+                      <p className="text-xs font-semibold text-slate-600 leading-relaxed px-2">
+                        Ayo pasang aplikasi ke Layar Utama HP atau Laptop kamu agar belajar huruf dan angka jadi lebih cepat tanpa mengetik nama website lagi!
+                      </p>
+                    </div>
 
-                {/* Direct Prompt Trigger Button if browser supports it */}
-                {deferredPrompt && (
-                  <button
-                    onClick={handleInstallClick}
-                    id="pwa-direct-install-btn"
-                    className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl shadow-md hover:shadow-indigo-100 transition-all text-xs active:scale-98 cursor-pointer flex items-center justify-center gap-2 uppercase tracking-widest border border-indigo-400/20"
-                  >
-                    <Download className="w-4 h-4 stroke-[2.5]" />
-                    Pasang Sekarang Ke Layar
-                  </button>
+                    {/* Direct Prompt Trigger Button if browser supports it */}
+                    {deferredPrompt && (
+                      <button
+                        onClick={handleInstallClick}
+                        id="pwa-direct-install-btn"
+                        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl shadow-md hover:shadow-indigo-100 transition-all text-xs active:scale-98 cursor-pointer flex items-center justify-center gap-2 uppercase tracking-widest border border-indigo-400/20"
+                      >
+                        <Download className="w-4 h-4 stroke-[2.5]" />
+                        Pasang Sekarang Ke Layar
+                      </button>
+                    )}
+                  </>
                 )}
 
                 {/* Platform Specific Guided Tabs */}

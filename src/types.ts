@@ -15,6 +15,6 @@ export interface QuizQuestion {
   visualData?: any; // Emojis or patterns to count
 }
 
-export type ActiveTab = 'home' | 'letters' | 'numbers' | 'quiz';
+export type ActiveTab = 'home' | 'letters' | 'numbers' | 'quiz' | 'writing';
 export type QuizMode = 'setup' | 'playing' | 'score';
 export type QuizCategory = 'all' | 'letters' | 'numbers';
